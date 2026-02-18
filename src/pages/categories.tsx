@@ -42,7 +42,7 @@ export default function CategoriesPage() {
         </div>
         {categories.map((item) => (
           <CardCategories
-            name={item.name}
+            nome={item.nome}
             color={item.color}
             observacao={item.observacao}
           />

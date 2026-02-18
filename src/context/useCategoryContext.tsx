@@ -1,10 +1,10 @@
 import { createContext, useState } from "react";
-import type { CategoriesProps } from "../types/category";
+import type { CategorieInput, CategoriesProps } from "../types/category";
 
 export type CategorieContextType = {
   categories: CategoriesProps[];
   addCategories: (categories: CategoriesProps) => void;
-  removeCategorie: (id: number) => void;
+  removeCategorie: (id: string) => void;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -15,10 +15,11 @@ export const CategorieContext = createContext<CategorieContextType | null>(
 export function CategorieProvider({ children }: { children: React.ReactNode }) {
   const [categories, setCategories] = useState<CategoriesProps[]>([]);
 
-  function addCategories(categories: CategoriesProps) {
-    setCategories((prev) => [...prev, categories]);
+  function addCategories(categories: CategorieInput) {
+    const newCategory = { id: crypto.randomUUID(), ...categories };
+    setCategories((prev) => [...prev, newCategory]);
   }
-  function removeCategorie(id: number) {
+  function removeCategorie(id: string) {
     setCategories((prev) => prev.filter((f) => f.id !== id));
   }
   return (
