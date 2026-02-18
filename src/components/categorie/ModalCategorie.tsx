@@ -41,6 +41,9 @@ export default function ModalCategories({ handleOpenModal }: ModalCategoria) {
               {...register("nome")}
               className="border border-gray-200 rounded px-2 h-8"
             />
+            {errors.nome && (
+              <span className="text-red-500">{errors.nome.message}</span>
+            )}
           </div>
 
           <div className="flex flex-col gap-0.5 mb-2">
