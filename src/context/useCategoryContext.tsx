@@ -3,7 +3,7 @@ import type { CategorieInput, CategoriesProps } from "../types/category";
 
 export type CategorieContextType = {
   categories: CategoriesProps[];
-  addCategories: (categories: CategoriesProps) => void;
+  addCategories: (categories: CategorieInput) => void;
   removeCategorie: (id: string) => void;
 };
 

@@ -1,7 +1,7 @@
 export type CategoriesProps = {
   id: string;
   nome: string;
-  observacao: string;
+  observacao?: string;
   color: string;
 };
 export type CategorieInput = Omit<CategoriesProps, "id">;

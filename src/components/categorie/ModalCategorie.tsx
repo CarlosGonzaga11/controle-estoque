@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useCategorieContext } from "../../hook/useCategories";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -8,7 +7,7 @@ type ModalCategoria = {
   handleOpenModal: () => void;
 };
 export default function ModalCategories({ handleOpenModal }: ModalCategoria) {
-  const { categories, addCategories } = useCategorieContext();
+  const { addCategories } = useCategorieContext();
 
   const CategorySchema = z.object({
     nome: z.string().trim().min(1, "Nome é obrigatório"),

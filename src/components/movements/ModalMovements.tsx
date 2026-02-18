@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useMovementsContext } from "../../hook/useMovements";
 import { useProducts } from "../../hook/useProduct";
 import { calcEstoque } from "../../utils/calcEstoque";
 import { useForm } from "react-hook-form";
-import z, { string } from "zod";
+import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 type ModalMove = {
@@ -11,13 +10,6 @@ type ModalMove = {
 };
 export default function ModalMovements({ handleOpenModal }: ModalMove) {
   const { movements, addMovements } = useMovementsContext();
-  // const [form, setForm] = useState({
-  //   tipo: "entrada" as "entrada" | "saida",
-  //   produto: "",
-  //   quantidade: "",
-  //   motivo: "",
-  //   observacao: "",
-  // });
 
   const movementsSchema = z.object({
     tipo: z.enum(["entrada", "saida"]),

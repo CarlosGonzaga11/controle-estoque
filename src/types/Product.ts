@@ -1,10 +1,10 @@
 export type Product = {
-  id: number;
-  codigo: number;
+  id: string;
+  codigo: string;
   nome: string;
   descricao: string;
-  categoriaId: number;
-  fornecedorId: number;
+  categoriaId?: string;
+  fornecedorId?: string;
   preco_c: number;
   preco_v: number;
   quantidade: number;
@@ -22,3 +22,5 @@ export type CardProduct = {
   preco_v: number;
   remove: () => void;
 };
+
+export type ProductsInput = Omit<Product, "id">;
