@@ -4,7 +4,7 @@ import type { CategorieCardProps } from "../../types/category";
 export default function CardCategories({
   observacao,
   color,
-  name,
+  nome,
 }: CategorieCardProps) {
   return (
     <div
@@ -21,7 +21,7 @@ export default function CardCategories({
     >
       <div>
         <span className="p-2 rounded" style={{ backgroundColor: color }}>
-          {name}
+          {nome}
         </span>
       </div>
       <div>
