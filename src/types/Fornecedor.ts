@@ -5,7 +5,7 @@ export type FornecedorProps = {
   telefone: string;
   endereco: string;
   pessoa_contato: string;
-  observacao: string;
+  observacao?: string;
 };
 export type FornecedorInput = Omit<FornecedorProps, "id">;
 

@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
-import type { MovementsProps } from "../types/Movements";
+import type { MovementsInput, MovementsProps } from "../types/Movements";
 
 /**criando tipo pro context */
 export type MovementsContextType = {
   movements: MovementsProps[];
-  addMovements: (movements: MovementsProps) => void;
-  removeMovements: (id: number) => void;
+  addMovements: (movements: MovementsInput) => void;
+  removeMovements: (id: string) => void;
 };
 
 /** tipar o context */
@@ -18,11 +18,12 @@ export const MovementsContext = createContext<MovementsContextType | null>(
 
 export function MovementsProvider({ children }: { children: React.ReactNode }) {
   const [movements, setMovements] = useState<MovementsProps[]>([]);
-  function addMovements(movements: MovementsProps) {
-    setMovements((prev) => [...prev, movements]);
+  function addMovements(movements: MovementsInput) {
+    const newMovement = { id: crypto.randomUUID(), ...movements };
+    setMovements((prev) => [...prev, newMovement]);
   }
 
-  function removeMovements(id: number) {
+  function removeMovements(id: string) {
     setMovements((prev) => prev.filter((f) => f.id !== id));
   }
 

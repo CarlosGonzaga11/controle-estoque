@@ -9,15 +9,6 @@ type ModalFornProps = {
 export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
   const { addFornecedor } = useFornecedorContext();
 
-  type formProps = {
-    nome: string;
-    email: string;
-    telefone: string;
-    pessoa_contato: string;
-    endereco: string;
-    observacao: string;
-  };
-
   const fornecedorSchema = z.object({
     nome: z.string().trim().min(1, "Nome é obrigatório"),
     email: z.string().trim().email("Email Inválido"),
@@ -36,10 +27,8 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
     resolver: zodResolver(fornecedorSchema),
   });
 
-  function onSubmit(data: formProps) {
-    addFornecedor({
-      ...data,
-    });
+  function onSubmit(data: FornecedorFormData) {
+    addFornecedor(data);
     handleOpenModal();
     console.log("?????????", data);
   }
