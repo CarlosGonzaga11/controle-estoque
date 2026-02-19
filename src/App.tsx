@@ -6,7 +6,7 @@ import ProductsPage from "./pages/products";
 import MovementsPage from "./pages/movements";
 import CategoriesPage from "./pages/categories";
 import FornecedorPage from "./pages/fornecedor";
-import AlertaPage from "./pages/alerta";
+import AlertaPage from "./pages/alert";
 
 function App() {
   return (

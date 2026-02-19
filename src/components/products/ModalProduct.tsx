@@ -20,9 +20,9 @@ export default function ModalProducts({ handleOpenModal }: ModalProps) {
 
     descricao: z.string(),
 
-    categoriaId: z.string().min(1, "Categoria obrigatória"),
+    categoriaId: z.string(),
 
-    fornecedorId: z.string().min(1, "Fornecedor obrigatório"),
+    fornecedorId: z.string(),
 
     preco_c: z
       .number()
@@ -63,6 +63,14 @@ export default function ModalProducts({ handleOpenModal }: ModalProps) {
     addProduct(data);
     console.log(data);
     handleOpenModal();
+  }
+  if (categories.length === 0 || fornecedores.length === 0) {
+    return (
+      <div className="p-4 text-sm text-red-500">
+        Cadastre ao menos uma categoria e um fornecedor antes de criar um
+        produto.
+      </div>
+    );
   }
 
   return (
