@@ -9,8 +9,19 @@ import {
   Truck,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useProducts } from "../../hook/useProduct";
+import { useMovementsContext } from "../../hook/useMovements";
+import { calcEstoque } from "../../utils/calcEstoque";
 
 export default function SideBar() {
+  const { products } = useProducts();
+  const { movements } = useMovementsContext();
+  const estoque = calcEstoque(products, movements);
+  const produtosEmAlerta = products.filter((item) => {
+    const estoqueProduto = estoque.find((e) => e.produto === item.nome);
+    if (!estoqueProduto) return false;
+    return estoqueProduto.quantidade <= item.estoque_minimo;
+  });
   const sidebar = [
     { name: "Dashboard", href: "/", icon: LayoutDashboard },
     { name: "Produtos", href: "/products", icon: Package },
@@ -18,7 +29,12 @@ export default function SideBar() {
     { name: "Categorias", href: "/categories", icon: FolderOpen },
     { name: "Fornecedores", href: "/fornecedor", icon: Truck },
     { name: "Relatórios", href: "/", icon: FileText },
-    { name: "Alertas", href: "/alerta", icon: Bell, alert: "1" },
+    {
+      name: "Alertas",
+      href: "/alerta",
+      icon: Bell,
+      alert: produtosEmAlerta.length,
+    },
   ];
   const buttonConfig = [
     { name: "Configurações", href: "/configuracoes", icon: Settings },
@@ -38,10 +54,15 @@ export default function SideBar() {
               to={item.href}
             >
               <div className="relative">
-                <Icon size={16} />
-                <p className="absolute text-[7px] text-black-400 bg-red-500 rounded-full bottom-0 right-0">
-                  {item.alert}
-                </p>
+                {produtosEmAlerta.length !== 0 && (
+                  <div>
+                    {" "}
+                    <Icon size={16} />
+                    <p className="absolute text-[7px] text-black-400 bg-red-500 rounded-full bottom-0 right-0">
+                      {item.alert}
+                    </p>
+                  </div>
+                )}
               </div>
 
               <span className="px-2">{item.name}</span>
