@@ -37,7 +37,9 @@ export default function CardProduct({
       <span>{categoria}</span>
 
       <div className="flex flex-col leading-tight">
-        <span className="font-bold text-sm">{quantidade}</span>
+        <span className="font-bold text-sm">
+          {quantidade === 0 ? "zerado" : quantidade}
+        </span>
         <span className="text-xs font-light">{estoque}</span>
       </div>
 

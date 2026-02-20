@@ -45,10 +45,28 @@ export default function ModalMovements({ handleOpenModal }: ModalMove) {
   const estoque = calcEstoque(products, movements);
 
   function handleSave(data: MovementsFormData) {
+    const produtoEstoque = estoque.find((e) => e.produto === data.produto);
+
+    if (
+      data.tipo === "saida" &&
+      (!produtoEstoque || data.quantidade > produtoEstoque.quantidade)
+    ) {
+      alert("Quantidade maior que o estoque disponível");
+      return;
+    }
     addMovements(data);
     console.log("data", data);
     handleOpenModal();
   }
+  const produtoSelecionado = watch("produto");
+
+  const estoqueProdutoSelecionado = estoque.find(
+    (e) => e.produto === produtoSelecionado
+  );
+  const semEstoque =
+    tipo === "saida" &&
+    estoqueProdutoSelecionado &&
+    estoqueProdutoSelecionado.quantidade === 0;
   return (
     <div className="border border-gray-200  p-4 rounded-lg max-h-screen overflow-y-auto text-sm">
       <form onSubmit={handleSubmit(handleSave)}>
@@ -105,11 +123,25 @@ export default function ModalMovements({ handleOpenModal }: ModalMove) {
 
           <div className="flex flex-col gap-1">
             <label className="text-xs">Quantidade</label>
+
             <input
               type="number"
               {...register("quantidade", { valueAsNumber: true })}
               className="border border-gray-200 rounded px-2 h-9"
+              disabled={semEstoque}
+              min={1}
+              max={
+                tipo === "saida"
+                  ? estoqueProdutoSelecionado?.quantidade
+                  : undefined
+              }
             />
+            {semEstoque && (
+              <span className="text-red-500 text-xs font-bold">
+                Produto sem estoque
+              </span>
+            )}
+
             {errors.quantidade && (
               <span className="text-red-500 text-xs">
                 {errors.quantidade.message}
