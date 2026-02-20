@@ -7,6 +7,7 @@ import MovementsPage from "./pages/movements";
 import CategoriesPage from "./pages/categories";
 import FornecedorPage from "./pages/fornecedor";
 import AlertaPage from "./pages/alert";
+import ReportPage from "./pages/report";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="fornecedor" element={<FornecedorPage />} />
           <Route path="alerta" element={<AlertaPage />} />
+          <Route path="relatorio" element={<ReportPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

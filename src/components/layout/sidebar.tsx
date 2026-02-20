@@ -28,7 +28,7 @@ export default function SideBar() {
     { name: "Movimentações", href: "/movements", icon: ArrowLeftRight },
     { name: "Categorias", href: "/categories", icon: FolderOpen },
     { name: "Fornecedores", href: "/fornecedor", icon: Truck },
-    { name: "Relatórios", href: "/", icon: FileText },
+    { name: "Relatórios", href: "/relatorio", icon: FileText },
     {
       name: "Alertas",
       href: "/alerta",
