@@ -74,7 +74,7 @@ export default function ModalProducts({ handleOpenModal }: ModalProps) {
   }
 
   return (
-    <div className="border p-4 rounded-lg max-h-screen overflow-y-auto text-sm">
+    <div className="border border-gray-200 p-4 rounded-lg max-h-screen overflow-y-auto text-sm">
       <form onSubmit={handleSubmit(handleSave)}>
         <h3 className="text-lg font-semibold mb-4">Novo Produto</h3>
 

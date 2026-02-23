@@ -176,7 +176,21 @@ export default function ModalMovements({ handleOpenModal }: ModalMove) {
             className="border border-gray-200 rounded px-2 py-1 h-20 resize-none"
           />
         </div>
-        <button type="submit">salvar movimentacoes</button>
+        <div className="grid grid-cols-2 gap-2 pt-2">
+          <button
+            className="p-2 rounded bg-gray-100 border-gray-500 text-blue-500"
+            type="submit"
+            onClick={handleOpenModal}
+          >
+            Cancelar
+          </button>
+          <button
+            className="border rounded bg-[#6170f7] text-white"
+            type="submit"
+          >
+            Salvar Movimentações
+          </button>
+        </div>
       </form>
     </div>
   );
