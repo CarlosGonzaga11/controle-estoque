@@ -1,4 +1,4 @@
-import { Delete, Edit } from "lucide-react";
+import { Archive, Boxes, Delete, Edit } from "lucide-react";
 import type { CategorieCardProps } from "../../types/category";
 
 export default function CardCategories({
@@ -19,21 +19,26 @@ export default function CardCategories({
     hover:shadow-[0_20px_40px_rgba(0,0,0,0.18)]
     grid grid-cols-[2fr_2fr_100px] px-4 py-3 items-center text-sm border-b border-gray-200"
     >
-      <div>
-        <span className="p-2 rounded" style={{ backgroundColor: color }}>
-          {nome}
-        </span>
+      <div className="flex items-center">
+        <div className="p-2 rounded bg-gray-200">
+          <Boxes color={color} size={16} />
+        </div>
+        <div>
+          <span className="p-2 rounded">{nome}</span>
+        </div>
       </div>
       <div>
-        <span className="border">{observacao}</span>
+        <span className=" text-gray-500">
+          {observacao ? observacao : "Nenhuma observação"}
+        </span>
       </div>
 
       <div className="flex gap-8 items-center px-2">
         <span>
-          <Delete />
+          <Delete size={16} />
         </span>
         <span>
-          <Edit />
+          <Edit size={16} />
         </span>
       </div>
     </div>

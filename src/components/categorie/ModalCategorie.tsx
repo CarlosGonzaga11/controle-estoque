@@ -29,13 +29,13 @@ export default function ModalCategories({ handleOpenModal }: ModalCategoria) {
     handleOpenModal();
   }
   return (
-    <div className="border p-3 rounded-md text-xs max-h-screen overflow-y-auto">
+    <div className="border border-gray-200 p-3 rounded-md text-xs max-h-screen overflow-y-auto">
       <form onSubmit={handleSubmit(handleSave)}>
         <h3 className="text-lg font-semibold mb-2">Nova Categoria</h3>
 
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-0.5">
-            <label>Nome*</label>
+            <label className="text-xs">Nome</label>
             <input
               {...register("nome")}
               className="border border-gray-200 rounded px-2 h-8"
@@ -46,13 +46,13 @@ export default function ModalCategories({ handleOpenModal }: ModalCategoria) {
           </div>
 
           <div className="flex flex-col gap-0.5 mb-2">
-            <label>Observação</label>
+            <label className="text-xs">Observação</label>
             <textarea
               {...register("observacao")}
               className="border border-gray-200 rounded px-2 py-1 h-14 resize-none"
             />
 
-            <label>cor</label>
+            <label className="text-xs">Escolha a cor da categoria</label>
             <input
               {...register("color")}
               type="color"

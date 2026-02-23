@@ -34,25 +34,28 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
   }
 
   return (
-    <div className="max-h-screen border p-4  overflow-y-auto text-sm">
+    <div className="max-h-screen border border-gray-200 rounded p-4  overflow-y-auto text-sm">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-1">
-          <label>Nome *</label>
-          <input {...register("nome")} className="border rounded px-2 h-9" />
+          <label className="text-xs">Nome *</label>
+          <input
+            {...register("nome")}
+            className="border border-gray-200 rounded px-2 h-9"
+          />
           {errors.nome && (
             <span className="text-red-500 text-xs">{errors.nome.message}</span>
           )}
         </div>
         <div className="grid grid-cols-1  sm:grid-cols-2 gap-2">
           <div className="flex flex-col gap-1">
-            <label>Email</label>
+            <label className="text-xs">Email</label>
             <input
               {...register("email", {
                 required: true,
                 pattern: /\S+@\S+\.\S+/,
               })}
               type="email"
-              className="border rounded px-2 h-9"
+              className="border border-gray-200 rounded px-2 h-9"
             />
             {errors.email && (
               <span className="text-red-500 text-xs">
@@ -62,10 +65,10 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label>Telefone</label>
+            <label className="text-xs">Telefone</label>
             <input
               {...register("telefone")}
-              className="border rounded px-2 h-9"
+              className="border border-gray-200 rounded px-2 h-9"
             />
             {errors.telefone && (
               <span className="text-red-500 text-xs">
@@ -76,10 +79,10 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
         </div>
 
         <div className="flex flex-col gap-1">
-          <label>Pessoa do Contato</label>
+          <label className="text-xs">Pessoa do Contato</label>
           <input
             {...register("pessoa_contato")}
-            className="border rounded px-2 h-9"
+            className="border border-gray-200 rounded px-2 h-9"
           />
           {errors.pessoa_contato && (
             <span className="text-red-500 text-xs">
@@ -88,10 +91,10 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <label>Endereço</label>
+          <label className="text-xs">Endereço</label>
           <input
             {...register("endereco")}
-            className="border rounded px-2 h-9"
+            className="border border-gray-200 rounded px-2 h-9"
           />
           {errors.endereco && (
             <span className="text-red-500 text-xs">
@@ -100,14 +103,27 @@ export default function ModalFornecedor({ handleOpenModal }: ModalFornProps) {
           )}
         </div>
         <div className="flex flex-col gap-1">
-          <label>Observações</label>
+          <label className="text-xs">Observações</label>
           <textarea
             {...register("observacao")}
-            className="border rounded px-2 py-1 h-"
+            className="border border-gray-200 rounded px-2 h-20"
           />
         </div>
-        <button type="submit">SALVAR FONRCEDOR</button>
-        {/* <button onClick={handleSaveFornecedor}>SALVAR FONRCEDOR</button> */}
+        <div className="grid grid-cols-2 gap-2 pt-2">
+          <button
+            type="button"
+            onClick={handleOpenModal}
+            className="border border-red-300 p-2 rounded bg-red-500 text-white"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            className="border border-green-500 rounded bg-[#28f774] text-white"
+          >
+            SALVAR TUDO
+          </button>
+        </div>
       </form>
     </div>
   );

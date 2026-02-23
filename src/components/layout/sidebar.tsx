@@ -56,7 +56,6 @@ export default function SideBar() {
               <div className="relative">
                 {produtosEmAlerta.length !== 0 && (
                   <div>
-                    {" "}
                     <Icon size={16} />
                     <p className="absolute text-[7px] text-black-400 bg-red-500 rounded-full bottom-0 right-0">
                       {item.alert}
