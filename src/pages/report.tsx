@@ -6,6 +6,8 @@ import { calcValorTotal } from "../utils/calcValor";
 import { useProducts } from "../hook/useProduct";
 import { useMovementsContext } from "../hook/useMovements";
 import { calcEstoque } from "../utils/calcEstoque";
+import CardAlertaEstoque from "../components/dashboard/CardAlertaEstoque";
+import CardTopEstoque from "../components/report/cardTopEstoque";
 export default function ReportPage() {
   const { products } = useProducts();
   const { movements } = useMovementsContext();
@@ -64,6 +66,33 @@ export default function ReportPage() {
   const saldoMovements = valorEntradaProdutos - valorSaidaProdutos;
 
   const estoque = calcEstoque(products, movements);
+
+  const produtoMaiorEstoque = products
+    .map((product) => {
+      const produtosEstoqe = estoque.find(
+        (est) => est.produto === product.nome
+      );
+      if (!produtosEstoqe) return null;
+      return {
+        id: product.id,
+        nome: product.nome,
+        qnt: produtosEstoqe.quantidade,
+        estoque_min: product.estoque_minimo,
+      };
+    })
+    .filter(
+      (
+        p
+      ): p is {
+        id: string;
+        nome: string;
+        qnt: number;
+        estoque_min: number;
+      } => p !== null
+    );
+
+  console.log("produtos com maior estoque", produtoMaiorEstoque);
+
   const produtosEmAlerta = products.filter((item) => {
     const estoqueProduto = estoque.find((e) => e.produto === item.nome);
     if (!estoqueProduto) return false;
@@ -177,7 +206,7 @@ export default function ReportPage() {
           <h3 className="mb-4 font-bold text-2xl">
             Produtos com maior estoque
           </h3>
-          <div className=" shadow-lg bg-green-100 rounded p-2 flex justify-between px-4 items-center">
+          {/* <div className=" shadow-lg bg-green-100 rounded p-2 flex justify-between px-4 items-center">
             <div className=" flex flex-row gap-4 items-center">
               <span className="bg-red-500 rounded-full p-1 px-2.5 font-bold text-sm">
                 1
@@ -186,27 +215,18 @@ export default function ReportPage() {
             </div>
 
             <div className="font-bold text-lg text-green-500">+0</div>
-          </div>
-          <div className="shadow-lg bg-green-100 rounded p-2 flex justify-between px-4 items-center">
-            <div className="flex flex-row gap-4 items-center">
-              <span className="bg-red-500 rounded-full p-1 px-2.5 font-bold text-sm">
-                1
-              </span>
-              <span className="font-bold text-green-500">Carlos</span>
-            </div>
-
-            <div className="font-bold text-lg text-green-500">+0</div>
-          </div>
-          <div className="shadow-lg bg-green-100 rounded p-2 flex justify-between px-4 items-center">
-            <div className=" flex flex-row gap-4 items-center">
-              <span className="bg-red-500 rounded-full p-1 px-2.5 font-bold text-sm">
-                1
-              </span>
-              <span className="font-bold text-green-500">Carlos</span>
-            </div>
-
-            <div className="font-bold text-lg text-green-500">+0</div>
-          </div>
+          </div> */}
+          {produtoMaiorEstoque
+            .sort((a, b) => b.qnt - a.qnt)
+            .slice(0, 3)
+            .map((produto) => (
+              <CardTopEstoque
+                key={produto.id}
+                nome={produto.nome}
+                estoqueProduto={produto.qnt}
+                estoque_minimo={produto.estoque_min}
+              />
+            ))}
         </div>
       </section>
     </div>

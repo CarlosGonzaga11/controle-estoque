@@ -58,6 +58,7 @@ export default function ModalMovements({ handleOpenModal }: ModalMove) {
     console.log("data", data);
     handleOpenModal();
   }
+
   const produtoSelecionado = watch("produto");
 
   const estoqueProdutoSelecionado = estoque.find(
